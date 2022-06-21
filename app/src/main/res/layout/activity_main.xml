@@ -25,7 +25,7 @@
         android:id="@+id/textView_empty"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="NO SONGS FOUND"
         app:layout_constraintStart_toStartOf="parent"
