@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/rosterSongsFragment">
+
+    <fragment
+        android:id="@+id/rosterSongsFragment"
+        android:name="com.example.musicplayer.ui.view.RosterSongsFragment"
+        android:label="RosterSongsFragment"
+        tools:layout="@layout/roster_songs_fragment">
+        <action
+            android:id="@+id/action_rosterSongsFragment_to_permissionsDeniedFragment"
+            app:destination="@id/permissionsDeniedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/permissionsDeniedFragment"
+        android:name="com.example.musicplayer.ui.view.PermissionsDeniedFragment"
+        android:label="PermissionsDeniedFragment" />
+</navigation>

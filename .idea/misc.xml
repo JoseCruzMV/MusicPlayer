@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/josec/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/josec/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/permissions_denied_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/josec/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/roster_songs_fragment.xml" value="0.152734375" />
       </map>
     </option>
   </component>
