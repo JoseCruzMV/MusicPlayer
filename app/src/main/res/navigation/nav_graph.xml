@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/rosterSongsFragment"
-        android:name="com.example.musicplayer.ui.view.RosterSongsFragment"
+        android:name="com.example.musicplayer.ui.view.rostersongs.RosterSongsFragment"
         android:label="RosterSongsFragment"
         tools:layout="@layout/roster_songs_fragment">
         <action

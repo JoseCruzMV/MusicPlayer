@@ -1,20 +1,27 @@
-package com.example.musicplayer.ui.view
+package com.example.musicplayer.ui.view.rostersongs
 
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.databinding.RosterSongsFragmentBinding
+import com.example.musicplayer.domain.model.AudioModel
+import java.io.File
 
 class RosterSongsFragment : Fragment() {
     private lateinit var binding: RosterSongsFragmentBinding
+
+    val songsList = mutableListOf<AudioModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +35,53 @@ class RosterSongsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         grantPermission()
+
+        val adapter = RosterSongsAdapter(layoutInflater)
+        binding.songsRecyclerView.apply {
+            setAdapter(adapter)
+            layoutManager = LinearLayoutManager(context)
+
+            addItemDecoration(
+                DividerItemDecoration(
+                    context,
+                    DividerItemDecoration.VERTICAL
+                )
+            )
+        }
+
+        val projection = arrayOf(
+            MediaStore.Audio.Media.TITLE,
+            MediaStore.Audio.Media.DATA,
+            MediaStore.Audio.Media.DURATION
+        )
+        val selection = MediaStore.Audio.Media.IS_MUSIC + " != 0"
+
+
+        val cursor = context?.contentResolver?.query(
+            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+            projection,
+            selection,
+            null,
+            null
+        )
+
+        cursor?.let {
+            while (it.moveToNext()) {
+                val songData = AudioModel(
+                    title = it.getString(0),
+                    path = it.getString(1),
+                    duration = it.getString(2)
+                )
+                if (File(songData.path).exists())
+                    songsList.add(songData)
+            }
+        }
+
+        if (songsList.isEmpty()) {
+            binding.tvNoSongs.isVisible = true
+        } else {
+            adapter.submitList(songsList)
+        }
     }
 
     private fun grantPermission(): Boolean {
@@ -48,7 +102,7 @@ class RosterSongsFragment : Fragment() {
                 }
                 else -> {
                     registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-                        if(!isGranted)
+                        if (!isGranted)
                             toPermissionDeniedFragment()
                     }.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
                     false
@@ -59,8 +113,7 @@ class RosterSongsFragment : Fragment() {
     }
 
     private fun toPermissionDeniedFragment() = findNavController().navigate(
-        RosterSongsFragmentDirections
-            .actionRosterSongsFragmentToPermissionsDeniedFragment()
+        RosterSongsFragmentDirections.actionRosterSongsFragmentToPermissionsDeniedFragment()
     )
 
 }
