@@ -5,17 +5,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.musicplayer.core.MediaPlayerHelper
 import com.example.musicplayer.databinding.RosterSongsItemBinding
 import com.example.musicplayer.domain.model.AudioModel
 
 class RosterSongsAdapter(
     private val inflater: LayoutInflater,
+    private val onClick: (AudioModel) -> Unit,
 ) : ListAdapter<AudioModel, RosterRowHolder>(DiffCallBack) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ) = RosterRowHolder(
-        RosterSongsItemBinding.inflate(inflater, parent, false)
+        RosterSongsItemBinding.inflate(inflater, parent, false),
+        onClick,
     )
 
     override fun onBindViewHolder(holder: RosterRowHolder, position: Int) {
@@ -25,10 +28,17 @@ class RosterSongsAdapter(
 
 class RosterRowHolder(
     private val binding: RosterSongsItemBinding,
+    private val onClick: (AudioModel) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(song: AudioModel) =
         binding.apply {
             tvSongTitle.text = song.title
+
+            clItemContainer.setOnClickListener {
+                MediaPlayerHelper.getInstance().reset()
+                MediaPlayerHelper.currentIndex = layoutPosition
+                onClick(song)
+            }
         }
 }
 

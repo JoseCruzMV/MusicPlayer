@@ -13,9 +13,21 @@
         <action
             android:id="@+id/action_rosterSongsFragment_to_permissionsDeniedFragment"
             app:destination="@id/permissionsDeniedFragment" />
+        <action
+            android:id="@+id/action_rosterSongsFragment_to_songsPlayerFragment"
+            app:destination="@id/songsPlayerFragment" />
     </fragment>
     <fragment
         android:id="@+id/permissionsDeniedFragment"
         android:name="com.example.musicplayer.ui.view.PermissionsDeniedFragment"
-        android:label="PermissionsDeniedFragment" />
+        android:label="PermissionsDeniedFragment"
+        tools:layout="@layout/permissions_denied_fragment" />
+    <fragment
+        android:id="@+id/songsPlayerFragment"
+        android:name="com.example.musicplayer.ui.view.SongsPlayerFragment"
+        android:label="SongsPlayerFragment"
+        tools:layout="@layout/songs_player_fragment" >
+        <argument android:name="song"
+            app:argType="com.example.musicplayer.domain.model.AudioModel" />
+    </fragment>
 </navigation>

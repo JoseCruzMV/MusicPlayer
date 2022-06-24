@@ -21,7 +21,7 @@ import java.io.File
 class RosterSongsFragment : Fragment() {
     private lateinit var binding: RosterSongsFragmentBinding
 
-    val songsList = mutableListOf<AudioModel>()
+    private val songsList = mutableListOf<AudioModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,10 +33,11 @@ class RosterSongsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val adapter = RosterSongsAdapter(
+            inflater = layoutInflater,
+            onClick = ::toSongsPlayerFragment
+        )
 
-        grantPermission()
-
-        val adapter = RosterSongsAdapter(layoutInflater)
         binding.songsRecyclerView.apply {
             setAdapter(adapter)
             layoutManager = LinearLayoutManager(context)
@@ -49,13 +50,26 @@ class RosterSongsFragment : Fragment() {
             )
         }
 
+        if (grantPermission()) {
+            getSongsList()
+
+            if (songsList.isEmpty()) {
+                binding.tvNoSongs.isVisible = true
+            } else {
+                adapter.submitList(songsList)
+            }
+        }
+    }
+
+    private fun getSongsList() {
+        if (songsList.isNotEmpty()) songsList.clear()
+
         val projection = arrayOf(
             MediaStore.Audio.Media.TITLE,
             MediaStore.Audio.Media.DATA,
             MediaStore.Audio.Media.DURATION
         )
         val selection = MediaStore.Audio.Media.IS_MUSIC + " != 0"
-
 
         val cursor = context?.contentResolver?.query(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -64,7 +78,6 @@ class RosterSongsFragment : Fragment() {
             null,
             null
         )
-
         cursor?.let {
             while (it.moveToNext()) {
                 val songData = AudioModel(
@@ -76,16 +89,11 @@ class RosterSongsFragment : Fragment() {
                     songsList.add(songData)
             }
         }
-
-        if (songsList.isEmpty()) {
-            binding.tvNoSongs.isVisible = true
-        } else {
-            adapter.submitList(songsList)
-        }
+        cursor?.close()
     }
 
     private fun grantPermission(): Boolean {
-        var result: Boolean = true
+        var result = true
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             result = when {
                 ContextCompat.checkSelfPermission(
@@ -112,8 +120,12 @@ class RosterSongsFragment : Fragment() {
         return result
     }
 
+    private fun toSongsPlayerFragment(song: AudioModel) = findNavController().navigate(
+        RosterSongsFragmentDirections
+            .actionRosterSongsFragmentToSongsPlayerFragment(song)
+    )
+
     private fun toPermissionDeniedFragment() = findNavController().navigate(
         RosterSongsFragmentDirections.actionRosterSongsFragmentToPermissionsDeniedFragment()
     )
-
 }
