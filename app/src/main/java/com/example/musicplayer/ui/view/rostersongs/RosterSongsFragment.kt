@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.musicplayer.core.MediaPlayerHelper
 import com.example.musicplayer.databinding.RosterSongsFragmentBinding
 import com.example.musicplayer.domain.model.AudioModel
 import java.io.File
@@ -57,6 +58,7 @@ class RosterSongsFragment : Fragment() {
                 binding.tvNoSongs.isVisible = true
             } else {
                 adapter.submitList(songsList)
+                MediaPlayerHelper.songsList = songsList
             }
         }
     }
