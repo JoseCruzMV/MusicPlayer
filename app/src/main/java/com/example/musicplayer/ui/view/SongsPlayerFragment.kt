@@ -1,9 +1,12 @@
 package com.example.musicplayer.ui.view
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.musicplayer.R
@@ -33,8 +36,39 @@ class SongsPlayerFragment : Fragment() {
             ivNext.setOnClickListener { playNextSong() }
             ivPrevious.setOnClickListener { playPreviousSong() }
             ivPausePlay.setOnClickListener { pausePlay() }
+
+            sbProgress.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(p0: SeekBar?, progress: Int, fromUser: Boolean) {
+                    if (mediaPlayer.isPlaying && fromUser)
+                        mediaPlayer.seekTo(progress)
+                }
+
+                override fun onStartTrackingTouch(p0: SeekBar?) {}
+
+                override fun onStopTrackingTouch(p0: SeekBar?) {}
+
+            })
         }
         setResourcesWithMusic()
+
+
+
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                try {
+                    binding.apply {
+                        sbProgress.progress = mediaPlayer.currentPosition
+                        tvCurrentTime.text = convertMilliToMMSS(mediaPlayer.currentPosition.toString())
+
+                    }
+                    handler.postDelayed(this, 1000)
+                } catch (e: Exception) {
+                    binding.sbProgress.progress = 0
+                }
+            }
+        }, 0)
+
     }
 
     private fun setResourcesWithMusic() {
@@ -42,11 +76,12 @@ class SongsPlayerFragment : Fragment() {
         binding.apply {
             tvPlayerTitle.text = currentSong.title
             tvTotalTime.text = convertMilliToMMSS(currentSong.duration)
+            ivPausePlay.setImageResource(R.drawable.ic_pause)
         }
         playMusic()
     }
 
-    private fun playMusic(){
+    private fun playMusic() {
         mediaPlayer.reset()
         try {
             mediaPlayer.setDataSource(currentSong.path)
