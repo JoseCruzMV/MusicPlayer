@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.example.musicplayer.R
 import com.example.musicplayer.core.MediaPlayerHelper
 import com.example.musicplayer.databinding.SongsPlayerFragmentBinding
+import com.example.musicplayer.domain.model.AudioModel
 import java.io.IOException
 
 class SongsPlayerFragment : Fragment() {
@@ -15,6 +17,7 @@ class SongsPlayerFragment : Fragment() {
 
     private val args: SongsPlayerFragmentArgs by navArgs()
     private val mediaPlayer = MediaPlayerHelper.getInstance()
+    private lateinit var currentSong: AudioModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,22 +29,27 @@ class SongsPlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.apply {
+            ivNext.setOnClickListener { playNextSong() }
+            ivPrevious.setOnClickListener { playPreviousSong() }
+            ivPausePlay.setOnClickListener { pausePlay() }
+        }
         setResourcesWithMusic()
-        playMusic()
     }
 
     private fun setResourcesWithMusic() {
+        currentSong = MediaPlayerHelper.songsList[MediaPlayerHelper.currentIndex]
         binding.apply {
-            tvPlayerTitle.text = args.song.title
-            tvTotalTime.text = convertMilliToMMSS(args.song.duration)
+            tvPlayerTitle.text = currentSong.title
+            tvTotalTime.text = convertMilliToMMSS(currentSong.duration)
         }
+        playMusic()
     }
 
     private fun playMusic(){
         mediaPlayer.reset()
         try {
-            mediaPlayer.setDataSource(args.song.path)
+            mediaPlayer.setDataSource(currentSong.path)
             mediaPlayer.prepare()
             mediaPlayer.start()
             binding.apply {
@@ -53,13 +61,41 @@ class SongsPlayerFragment : Fragment() {
         }
     }
 
+    private fun playNextSong() {
+        if (MediaPlayerHelper.currentIndex == MediaPlayerHelper.songsList.lastIndex) {
+            MediaPlayerHelper.currentIndex = 0
+        } else {
+            MediaPlayerHelper.currentIndex += 1
+        }
+        mediaPlayer.reset()
+        setResourcesWithMusic()
+    }
+
+    private fun playPreviousSong() {
+        if (MediaPlayerHelper.currentIndex == 0) {
+            MediaPlayerHelper.currentIndex = MediaPlayerHelper.songsList.lastIndex
+        } else {
+            MediaPlayerHelper.currentIndex -= 1
+        }
+        mediaPlayer.reset()
+        setResourcesWithMusic()
+    }
+
+    private fun pausePlay() {
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
+            binding.ivPausePlay.setImageResource(R.drawable.ic_play)
+        } else {
+            mediaPlayer.start()
+            binding.ivPausePlay.setImageResource(R.drawable.ic_pause)
+
+        }
+    }
+
     private fun convertMilliToMMSS(duration: String): String {
         val mm = duration.toLong() / 1000 / 60
         val ss = duration.toLong() / 1000 % 60
         return "${mm.toString().padStart(2, '0')}:" +
                 "${ss.toString().padStart(2, '0')}"
     }
-
-
-
 }
