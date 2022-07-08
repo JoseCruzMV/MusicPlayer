@@ -83,6 +83,7 @@ class SongsPlayerFragment : Fragment() {
 
     private fun playMusic() {
         mediaPlayer.reset()
+
         try {
             mediaPlayer.setDataSource(currentSong.path)
             mediaPlayer.prepare()
