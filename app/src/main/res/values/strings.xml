@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">MusicPlayer</string>
+    <string name="roster_songs_title">Your Songs</string>
+    <string name="no_songs_found_message">No Songs Found</string>
+    <string name="permission_required_message">Store permission is required</string>
+    <string name="ask_permission_button">Provide Permission</string>
+    <string name="starter_time_player">00:00</string>
+    <string name="songs_cover_description">Songs cover</string>
+    <string name="pause_play_button_description">Pause / Play button</string>
+    <string name="previous_song_button_description">Previous Song button</string>
+    <string name="skip_song_button_description">Next Song Button</string>
 </resources>

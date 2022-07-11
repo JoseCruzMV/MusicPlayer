@@ -2,12 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/FragmentsTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="16dp">
 
     <TextView
         android:id="@+id/tv_player_title"
+        style="@style/TextTitleTheme"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:ellipsize="marquee"
@@ -27,19 +29,22 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/songs_cover_description"
         app:layout_constraintBottom_toTopOf="@+id/tv_current_time"
         app:layout_constraintDimensionRatio="1.1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_player_title"
         app:layout_constraintVertical_weight="3"
+        app:tint="@color/secondary"
         app:srcCompat="@drawable/ic_music_note" />
 
     <TextView
         android:id="@+id/tv_current_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="00:00"
+        android:text="@string/starter_time_player"
+        android:textColor="@color/secondary"
         app:layout_constraintBottom_toTopOf="@+id/iv_previous"
         app:layout_constraintEnd_toStartOf="@+id/sb_progress"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -62,7 +67,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="end"
-        android:text="00:00"
+        android:text="@string/starter_time_player"
+        android:textColor="@color/secondary"
         app:layout_constraintBottom_toBottomOf="@+id/sb_progress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
@@ -73,29 +79,38 @@
         android:id="@+id/iv_previous"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:contentDescription="@string/previous_song_button_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iv_pause_play"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_current_time"
-        app:srcCompat="@drawable/ic_skip_previous" />
+        app:srcCompat="@drawable/ic_skip_previous"
+        app:tint="@color/secondary"
+        tools:ignore="RedundantDescriptionCheck,RedundantDescriptionCheck" />
 
     <ImageView
         android:id="@+id/iv_pause_play"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:contentDescription="@string/pause_play_button_description"
         app:layout_constraintBottom_toBottomOf="@+id/iv_previous"
         app:layout_constraintEnd_toStartOf="@+id/iv_next"
         app:layout_constraintStart_toEndOf="@+id/iv_previous"
         app:layout_constraintTop_toTopOf="@+id/iv_previous"
-        app:srcCompat="@drawable/ic_pause" />
+        app:srcCompat="@drawable/ic_pause"
+        app:tint="@color/secondary"
+        tools:ignore="RedundantDescriptionCheck,RedundantDescriptionCheck" />
 
     <ImageView
         android:id="@+id/iv_next"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:contentDescription="@string/skip_song_button_description"
         app:layout_constraintBottom_toBottomOf="@+id/iv_pause_play"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_pause_play"
         app:layout_constraintTop_toTopOf="@+id/iv_pause_play"
-        app:srcCompat="@drawable/ic_skip_next" />
+        app:srcCompat="@drawable/ic_skip_next"
+        app:tint="@color/secondary"
+        tools:ignore="RedundantDescriptionCheck,RedundantDescriptionCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
