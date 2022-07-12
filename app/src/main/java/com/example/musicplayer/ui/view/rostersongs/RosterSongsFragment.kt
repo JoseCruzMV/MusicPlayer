@@ -3,7 +3,6 @@ package com.example.musicplayer.ui.view.rostersongs
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,18 +10,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.musicplayer.core.MediaPlayerHelper
 import com.example.musicplayer.databinding.RosterSongsFragmentBinding
 import com.example.musicplayer.domain.model.AudioModel
-import java.io.File
+import com.example.musicplayer.ui.viewmodel.RosterSongsViewModel
 
 class RosterSongsFragment : Fragment() {
     private lateinit var binding: RosterSongsFragmentBinding
 
-    private val songsList = mutableListOf<AudioModel>()
+    private val rosterSongsViewModel: RosterSongsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,46 +51,16 @@ class RosterSongsFragment : Fragment() {
         }
 
         if (grantPermission()) {
-            getSongsList()
 
-            if (songsList.isEmpty()) {
-                binding.tvNoSongs.isVisible = true
-            } else {
-                adapter.submitList(songsList)
-                MediaPlayerHelper.songsList = songsList
+            rosterSongsViewModel.getSongsList()
+            rosterSongsViewModel.songsList.observe(viewLifecycleOwner) { currentSongsList ->
+                if (currentSongsList.isEmpty()) {
+                    binding.tvNoSongs.isVisible = true
+                } else {
+                    adapter.submitList(currentSongsList)
+                }
             }
         }
-    }
-
-    private fun getSongsList() {
-        if (songsList.isNotEmpty()) songsList.clear()
-
-        val projection = arrayOf(
-            MediaStore.Audio.Media.TITLE,
-            MediaStore.Audio.Media.DATA,
-            MediaStore.Audio.Media.DURATION
-        )
-        val selection = MediaStore.Audio.Media.IS_MUSIC + " != 0"
-
-        val cursor = context?.contentResolver?.query(
-            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-            projection,
-            selection,
-            null,
-            null
-        )
-        cursor?.let {
-            while (it.moveToNext()) {
-                val songData = AudioModel(
-                    title = it.getString(0),
-                    path = it.getString(1),
-                    duration = it.getString(2)
-                )
-                if (File(songData.path).exists())
-                    songsList.add(songData)
-            }
-        }
-        cursor?.close()
     }
 
     private fun grantPermission(): Boolean {
