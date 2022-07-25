@@ -11,14 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.musicplayer.R
 import com.example.musicplayer.core.MediaPlayerHelper
+import com.example.musicplayer.core.QueueHelper
 import com.example.musicplayer.databinding.SongsPlayerFragmentBinding
 import com.example.musicplayer.domain.model.AudioModel
 import java.io.IOException
 
 class SongsPlayerFragment : Fragment() {
     private lateinit var binding: SongsPlayerFragmentBinding
-
-    private val args: SongsPlayerFragmentArgs by navArgs()
     private val mediaPlayer = MediaPlayerHelper.getInstance()
     private lateinit var currentSong: AudioModel
 
@@ -72,7 +71,8 @@ class SongsPlayerFragment : Fragment() {
     }
 
     private fun setResourcesWithMusic() {
-        currentSong = MediaPlayerHelper.songsList[MediaPlayerHelper.currentIndex]
+        //currentSong = MediaPlayerHelper.songsList[MediaPlayerHelper.currentIndex]
+        currentSong = QueueHelper.songsList[QueueHelper.currentIndex]
         binding.apply {
             tvPlayerTitle.text = currentSong.title
             tvTotalTime.text = convertMilliToMMSS(currentSong.duration)

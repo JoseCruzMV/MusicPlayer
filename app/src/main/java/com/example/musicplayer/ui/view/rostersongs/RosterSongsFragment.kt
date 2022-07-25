@@ -91,9 +91,8 @@ class RosterSongsFragment : Fragment() {
         return result
     }
 
-    private fun toSongsPlayerFragment(song: AudioModel) = findNavController().navigate(
-        RosterSongsFragmentDirections
-            .actionRosterSongsFragmentToSongsPlayerFragment(song)
+    private fun toSongsPlayerFragment() = findNavController().navigate(
+        RosterSongsFragmentDirections.actionRosterSongsFragmentToSongsPlayerFragment()
     )
 
     private fun toPermissionDeniedFragment() = findNavController().navigate(

@@ -26,8 +26,5 @@
         android:id="@+id/songsPlayerFragment"
         android:name="com.example.musicplayer.ui.view.SongsPlayerFragment"
         android:label="SongsPlayerFragment"
-        tools:layout="@layout/songs_player_fragment" >
-        <argument android:name="song"
-            app:argType="com.example.musicplayer.domain.model.AudioModel" />
-    </fragment>
+        tools:layout="@layout/songs_player_fragment" />
 </navigation>
