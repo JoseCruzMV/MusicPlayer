@@ -9,14 +9,9 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import com.example.musicplayer.R
-import com.example.musicplayer.core.MediaPlayerHelper
-import com.example.musicplayer.core.QueueHelper
 import com.example.musicplayer.databinding.SongsPlayerFragmentBinding
-import com.example.musicplayer.domain.model.AudioModel
 import com.example.musicplayer.ui.viewmodel.SongsPlayerViewModel
-import java.io.IOException
 
 class SongsPlayerFragment : Fragment() {
     private lateinit var binding: SongsPlayerFragmentBinding
@@ -70,7 +65,6 @@ class SongsPlayerFragment : Fragment() {
         }
 
         /*TODO Implement handler directly in view model */
-        /*TODO Play next song when current finishes */
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed(object : Runnable {
             override fun run() {
@@ -93,6 +87,6 @@ class SongsPlayerFragment : Fragment() {
         val mm = duration.toLong() / 1000 / 60
         val ss = duration.toLong() / 1000 % 60
         return "${mm.toString().padStart(2, '0')}:" +
-                "${ss.toString().padStart(2, '0')}"
+                ss.toString().padStart(2, '0')
     }
 }

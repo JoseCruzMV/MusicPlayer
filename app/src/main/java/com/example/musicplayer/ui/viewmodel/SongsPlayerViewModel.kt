@@ -3,7 +3,6 @@ package com.example.musicplayer.ui.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.musicplayer.core.MediaPlayerHelper
-import com.example.musicplayer.core.MediaPlayerHelper.mediaPlayer
 import com.example.musicplayer.core.QueueHelper
 import com.example.musicplayer.domain.model.AudioModel
 import kotlinx.coroutines.*
@@ -12,7 +11,7 @@ import kotlinx.coroutines.Dispatchers.IO
 class SongsPlayerViewModel : ViewModel() {
 
     val currentSong = MutableLiveData<AudioModel>()
-    lateinit var _currentSong: AudioModel
+    private lateinit var _currentSong: AudioModel
     val isSongPlaying = MutableLiveData<Boolean>()
 
 
@@ -29,14 +28,14 @@ class SongsPlayerViewModel : ViewModel() {
         }
     }
 
-    fun playMusic() {
+    private fun playMusic() {
         mediaPlayer.reset()
 
         try {
             mediaPlayer.setDataSource(_currentSong.path)
             mediaPlayer.prepare()
             mediaPlayer.start()
-
+            mediaPlayer.setOnCompletionListener { nextSong() }
         } catch (e: Exception) {
             Log.d("Player", e.toString())
         }
