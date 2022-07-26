@@ -14,6 +14,8 @@
         android:layout_height="0dp"
         android:ellipsize="marquee"
         android:gravity="center_vertical"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
         android:singleLine="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toTopOf="@+id/iv_music_icon"
@@ -36,8 +38,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_player_title"
         app:layout_constraintVertical_weight="3"
-        app:tint="@color/secondary"
-        app:srcCompat="@drawable/ic_music_note" />
+        app:srcCompat="@drawable/ic_music_note"
+        app:tint="@color/secondary" />
 
     <TextView
         android:id="@+id/tv_current_time"

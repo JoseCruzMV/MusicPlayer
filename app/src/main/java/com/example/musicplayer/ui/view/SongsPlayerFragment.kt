@@ -48,6 +48,7 @@ class SongsPlayerFragment : Fragment() {
         songsPlayerViewModel.currentSong.observe(viewLifecycleOwner) { currentSong ->
             binding.apply {
                 tvPlayerTitle.text = currentSong.title
+                tvPlayerTitle.isSelected = true
                 sbProgress.progress = 0
                 sbProgress.max = currentSong.duration.toInt()
                 tvTotalTime.text = convertMilliToMMSS(currentSong.duration)
