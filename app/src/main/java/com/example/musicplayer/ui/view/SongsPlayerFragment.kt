@@ -64,23 +64,12 @@ class SongsPlayerFragment : Fragment() {
             }
         }
 
-        /*TODO Implement handler directly in view model */
-        val handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(object : Runnable {
-            override fun run() {
-                try {
-                    binding.apply {
-                        sbProgress.progress = songsPlayerViewModel.getSongProgression()
-                        tvCurrentTime.text = convertMilliToMMSS(songsPlayerViewModel.getSongProgression().toString())
-
-                    }
-                    handler.postDelayed(this, 1000)
-                } catch (e: Exception) {
-                    binding.sbProgress.progress = 0
-                }
+        songsPlayerViewModel.songProgress.observe(viewLifecycleOwner) { currentSongPosition ->
+            binding.apply {
+                sbProgress.progress = currentSongPosition
+                tvCurrentTime.text = convertMilliToMMSS(currentSongPosition.toString())
             }
-        }, 0)
-
+        }
     }
 
     private fun convertMilliToMMSS(duration: String): String {

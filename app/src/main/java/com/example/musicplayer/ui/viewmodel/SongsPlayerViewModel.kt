@@ -13,7 +13,8 @@ class SongsPlayerViewModel : ViewModel() {
     val currentSong = MutableLiveData<AudioModel>()
     private lateinit var _currentSong: AudioModel
     val isSongPlaying = MutableLiveData<Boolean>()
-
+    val songProgress = MutableLiveData<Int> ()
+    private var _songProgress = 0
 
     private val mediaPlayer = MediaPlayerHelper.getInstance()
 
@@ -21,11 +22,7 @@ class SongsPlayerViewModel : ViewModel() {
         _currentSong = QueueHelper.songsList[QueueHelper.currentIndex]
         currentSong.postValue(_currentSong)
         playMusic()
-
-        CoroutineScope(IO).launch {
-            launch { getSongProgression() }
-            delay(1000)
-        }
+        viewModelScope.launch { getCurrentPosition() }
     }
 
     private fun playMusic() {
@@ -71,7 +68,12 @@ class SongsPlayerViewModel : ViewModel() {
         }
     }
 
-    fun getSongProgression() = mediaPlayer.currentPosition
-
     fun seekSongTo(moveTo: Int) = mediaPlayer.seekTo(moveTo)
+
+    private suspend fun getCurrentPosition() {
+        while (true) {
+            songProgress.postValue(mediaPlayer.currentPosition)
+            delay(1000)
+        }
+    }
 }
