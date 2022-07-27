@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/FragmentsTheme"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="0dp">
 
     <TextView
         android:id="@+id/textView"
         style="@style/TextTitleTheme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16"
         android:text="@string/roster_songs_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +35,7 @@
         android:id="@+id/songs_recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_16"
         app:layout_constraintBottom_toTopOf="@id/layout_controls"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +43,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_controls"
+        style="@style/Controls"
+        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/Controls"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,10 +54,11 @@
 
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/iv_controls_roster_cover"
+            android:layout_width="@dimen/controls_size"
+            android:layout_height="@dimen/controls_size"
+            android:background="@drawable/ic_launcher_background"
             android:contentDescription="@string/songs_cover_description"
-            android:layout_width="@dimen/image_roster"
-            android:layout_height="@dimen/image_roster"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -64,15 +69,20 @@
             style="@style/TextTheme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@+id/iv_pause_play"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            android:layout_margin="@dimen/margin_8"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            app:layout_constraintEnd_toStartOf="@+id/iv_controls_roster_pause_play"
+            app:layout_constraintStart_toEndOf="@+id/iv_controls_roster_cover"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="TextView" />
 
         <ImageView
-            android:id="@+id/iv_pause_play"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:id="@+id/iv_controls_roster_pause_play"
+            android:layout_width="@dimen/controls_size"
+            android:layout_height="@dimen/controls_size"
             android:contentDescription="@string/pause_play_button_description"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
             app:layout_constraintEnd_toEndOf="parent"
@@ -84,6 +94,7 @@
         <SeekBar
             android:id="@+id/seekBar"
             android:layout_width="0dp"
+            android:paddingTop="@dimen/margin_8"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
