@@ -14,13 +14,12 @@ class SongsPlayerViewModel : ViewModel() {
     private lateinit var _currentSong: AudioModel
     val isSongPlaying = MutableLiveData<Boolean>()
     val songProgress = MutableLiveData<Int> ()
-    private var _songProgress = 0
 
     private val mediaPlayer = MediaPlayerHelper.getInstance()
 
     fun getCurrentSong() {
         _currentSong = QueueHelper.songsList[QueueHelper.currentIndex]
-        currentSong.postValue(_currentSong)
+        currentSong.value = _currentSong
         playMusic()
         viewModelScope.launch { getCurrentPosition() }
     }

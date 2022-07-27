@@ -1,13 +1,12 @@
 package com.example.musicplayer.ui.view
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.SongsPlayerFragmentBinding
@@ -16,7 +15,7 @@ import com.example.musicplayer.ui.viewmodel.SongsPlayerViewModel
 class SongsPlayerFragment : Fragment() {
     private lateinit var binding: SongsPlayerFragmentBinding
 
-    private val songsPlayerViewModel: SongsPlayerViewModel by viewModels ()
+    private val songsPlayerViewModel: SongsPlayerViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +38,7 @@ class SongsPlayerFragment : Fragment() {
                     if (fromUser)
                         songsPlayerViewModel.seekSongTo(progress)
                 }
+
                 override fun onStartTrackingTouch(p0: SeekBar?) {}
                 override fun onStopTrackingTouch(p0: SeekBar?) {}
             })

@@ -38,6 +38,6 @@
 
     <style name="Controls" parent="Theme.MusicPlayer">
         <item name="android:background">@color/darkContrast</item>
-        <item name="android:padding">@dimen/widget_padding</item>
+        <item name="android:padding">@dimen/fragment_padding</item>
     </style>
 </resources>

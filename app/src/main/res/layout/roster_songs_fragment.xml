@@ -59,7 +59,7 @@
             android:layout_height="@dimen/controls_size"
             android:background="@drawable/ic_launcher_background"
             android:contentDescription="@string/songs_cover_description"
-            app:layout_constraintBottom_toTopOf="@+id/seekBar"
+            app:layout_constraintBottom_toTopOf="@+id/sb_controls_roster_progress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_launcher_foreground" />
@@ -84,7 +84,7 @@
             android:layout_width="@dimen/controls_size"
             android:layout_height="@dimen/controls_size"
             android:contentDescription="@string/pause_play_button_description"
-            app:layout_constraintBottom_toTopOf="@+id/seekBar"
+            app:layout_constraintBottom_toTopOf="@+id/sb_controls_roster_progress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_pause"
@@ -92,7 +92,7 @@
             tools:ignore="RedundantDescriptionCheck,RedundantDescriptionCheck" />
 
         <SeekBar
-            android:id="@+id/seekBar"
+            android:id="@+id/sb_controls_roster_progress"
             android:layout_width="0dp"
             android:paddingTop="@dimen/margin_8"
             android:layout_height="wrap_content"

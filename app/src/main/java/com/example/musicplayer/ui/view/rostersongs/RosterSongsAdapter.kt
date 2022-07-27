@@ -37,7 +37,7 @@ class RosterRowHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(song: AudioModel) = binding.apply {
         //val color = ContextCompat.getColor()
-        /* TODO get context to  user getColor to retrieve color resource */
+        /*TODO get context to  user getColor to retrieve color resource */
         if (layoutPosition == QueueHelper.currentIndex)
             tvSongTitle.setTextColor(Color.parseColor("#B771FC"))
         tvSongTitle.text = song.title
