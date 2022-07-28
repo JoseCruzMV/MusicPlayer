@@ -2,8 +2,8 @@ package com.example.musicplayer.ui.viewmodel
 
 import android.app.Application
 import android.provider.MediaStore
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.musicplayer.core.QueueHelper
 import com.example.musicplayer.domain.model.AudioModel
@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RosterSongsViewModel @Inject constructor(
-    application: Application,
-) : AndroidViewModel(application) {
+    private val application: Application,
+) : ViewModel() {
     val songsList = MutableLiveData<List<AudioModel>>()
     private val songs = mutableListOf<AudioModel>()
 
@@ -31,7 +31,7 @@ class RosterSongsViewModel @Inject constructor(
 
             val selection = MediaStore.Audio.Media.IS_MUSIC + " != 0"
 
-            val cursor = getApplication<Application>().applicationContext.contentResolver.query(
+            val cursor =  application.applicationContext.contentResolver.query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 projection,
                 selection,

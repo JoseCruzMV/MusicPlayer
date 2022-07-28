@@ -7,7 +7,6 @@ import com.example.musicplayer.core.QueueHelper
 import com.example.musicplayer.domain.model.AudioModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
 import javax.inject.Inject
 
 @HiltViewModel
