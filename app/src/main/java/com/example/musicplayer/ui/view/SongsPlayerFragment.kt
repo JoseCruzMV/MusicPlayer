@@ -11,7 +11,9 @@ import androidx.fragment.app.viewModels
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.SongsPlayerFragmentBinding
 import com.example.musicplayer.ui.viewmodel.SongsPlayerViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SongsPlayerFragment : Fragment() {
     private lateinit var binding: SongsPlayerFragmentBinding
 

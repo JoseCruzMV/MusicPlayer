@@ -5,10 +5,13 @@ import androidx.lifecycle.*
 import com.example.musicplayer.core.MediaPlayerHelper
 import com.example.musicplayer.core.QueueHelper
 import com.example.musicplayer.domain.model.AudioModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
+import javax.inject.Inject
 
-class SongsPlayerViewModel : ViewModel() {
+@HiltViewModel
+class SongsPlayerViewModel @Inject constructor() : ViewModel() {
 
     val currentSong = MutableLiveData<AudioModel>()
     private lateinit var _currentSong: AudioModel

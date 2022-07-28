@@ -11,7 +11,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.musicplayer.databinding.PermissionsDeniedFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PermissionsDeniedFragment : Fragment() {
     private lateinit var binding: PermissionsDeniedFragmentBinding
     private lateinit var permissionLauncher: ActivityResultLauncher<String>

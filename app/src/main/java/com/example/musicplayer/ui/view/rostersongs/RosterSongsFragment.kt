@@ -20,7 +20,9 @@ import com.example.musicplayer.R
 import com.example.musicplayer.databinding.RosterSongsFragmentBinding
 import com.example.musicplayer.ui.viewmodel.RosterSongsViewModel
 import com.example.musicplayer.ui.viewmodel.SongsPlayerViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RosterSongsFragment : Fragment() {
     private lateinit var binding: RosterSongsFragmentBinding
 

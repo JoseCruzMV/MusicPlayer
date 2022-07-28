@@ -7,10 +7,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.musicplayer.core.QueueHelper
 import com.example.musicplayer.domain.model.AudioModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.File
+import javax.inject.Inject
 
-class RosterSongsViewModel(
+@HiltViewModel
+class RosterSongsViewModel @Inject constructor(
     application: Application,
 ) : AndroidViewModel(application) {
     val songsList = MutableLiveData<List<AudioModel>>()
