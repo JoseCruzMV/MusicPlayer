@@ -27,6 +27,8 @@ class RosterSongsViewModel @Inject constructor(
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.DATA,
                 MediaStore.Audio.Media.DURATION,
+                MediaStore.Audio.Media.ARTIST,
+                MediaStore.Audio.Media.ALBUM_ID,
             )
 
             val selection = MediaStore.Audio.Media.IS_MUSIC + " != 0"
@@ -44,7 +46,9 @@ class RosterSongsViewModel @Inject constructor(
                     val songData = AudioModel(
                         title = it.getString(0),
                         path = it.getString(1),
-                        duration = it.getString(2)
+                        duration = it.getString(2),
+                        artist = it.getString(3) ?: "Unknown",
+                        cover = it.getString(4),
                     )
                     if (File(songData.path).exists()) songs.add(songData)
                 }

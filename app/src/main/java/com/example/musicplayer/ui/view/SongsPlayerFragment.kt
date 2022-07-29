@@ -1,5 +1,7 @@
 package com.example.musicplayer.ui.view
 
+import android.content.ContentUris
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import androidx.fragment.app.viewModels
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.SongsPlayerFragmentBinding
 import com.example.musicplayer.ui.viewmodel.SongsPlayerViewModel
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,10 +54,19 @@ class SongsPlayerFragment : Fragment() {
             binding.apply {
                 tvPlayerTitle.text = currentSong.title
                 tvPlayerTitle.isSelected = true
+                tvPlayerArtist.text = currentSong.artist
                 sbProgress.progress = 0
                 sbProgress.max = currentSong.duration.toInt()
                 tvTotalTime.text = convertMilliToMMSS(currentSong.duration)
                 ivPausePlay.setImageResource(R.drawable.ic_pause)
+
+                val albumUri = Uri.parse("content://media/external/audio/albumart")
+                val uri = currentSong.cover?.let { ContentUris.withAppendedId(albumUri, it.toLong()) }
+                Picasso.get().load(uri)
+                    .fit()
+                    .centerCrop()
+                    .error(R.drawable.unknownsong)
+                    .into(ivMusicIcon)
             }
         }
 

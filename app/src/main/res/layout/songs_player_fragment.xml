@@ -19,8 +19,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_music_note"
-        app:tint="@color/secondary" />
+        app:srcCompat="@drawable/ic_music_note" />
 
     <TextView
         android:id="@+id/tv_player_title"
@@ -38,6 +37,17 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_music_icon"
+        tools:text="TextView" />
+
+    <TextView
+        android:id="@+id/tv_player_artist"
+        style="@style/LightTextTheme"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="@+id/tv_player_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_player_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_player_title"
         tools:text="TextView" />
 
     <TextView
@@ -114,13 +124,4 @@
         app:tint="@color/secondary"
         tools:ignore="RedundantDescriptionCheck,RedundantDescriptionCheck" />
 
-    <TextView
-        android:id="@+id/tv_player_author"
-        style="@style/LightTextTheme"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/tv_player_title"
-        app:layout_constraintStart_toStartOf="@+id/tv_player_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_player_title"
-        tools:text="TextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

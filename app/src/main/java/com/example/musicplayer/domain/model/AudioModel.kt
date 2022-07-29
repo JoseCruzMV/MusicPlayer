@@ -6,4 +6,6 @@ data class AudioModel(
     val path: String,
     val title: String,
     val duration: String,
+    val artist: String?,
+    val cover: String?,
 ) : Serializable

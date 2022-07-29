@@ -57,12 +57,11 @@
             android:id="@+id/iv_controls_roster_cover"
             android:layout_width="@dimen/controls_size"
             android:layout_height="@dimen/controls_size"
-            android:background="@drawable/ic_launcher_background"
             android:contentDescription="@string/songs_cover_description"
             app:layout_constraintBottom_toTopOf="@+id/sb_controls_roster_progress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            app:srcCompat="@drawable/unknownsong" />
 
         <TextView
             android:id="@+id/tv_controls_roster_song_title"
@@ -80,13 +79,10 @@
             tools:text="TextView" />
 
         <TextView
-            android:id="@+id/tv_controls_roster_song_author"
+            android:id="@+id/tv_controls_roster_song_artist"
             style="@style/LightTextTheme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
             android:singleLine="true"
             app:layout_constraintEnd_toEndOf="@+id/tv_controls_roster_song_title"
             app:layout_constraintStart_toStartOf="@+id/tv_controls_roster_song_title"

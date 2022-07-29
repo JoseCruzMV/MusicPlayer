@@ -1,6 +1,8 @@
 package com.example.musicplayer.ui.view.rostersongs
 
+import android.content.ContentUris
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,6 +22,7 @@ import com.example.musicplayer.R
 import com.example.musicplayer.databinding.RosterSongsFragmentBinding
 import com.example.musicplayer.ui.viewmodel.RosterSongsViewModel
 import com.example.musicplayer.ui.viewmodel.SongsPlayerViewModel
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -100,10 +103,20 @@ class RosterSongsFragment : Fragment() {
             binding.apply {
                 tvControlsRosterSongTitle.text = currentSong.title
                 tvControlsRosterSongTitle.isSelected = true
-                tvControlsRosterSongAuthor.isSelected = true
+                tvControlsRosterSongArtist.text = currentSong.artist
+                tvControlsRosterSongArtist.isSelected = true
                 sbControlsRosterProgress.progress = 0
                 sbControlsRosterProgress.max = currentSong.duration.toInt()
                 ivControlsRosterPausePlay.setImageResource(R.drawable.ic_pause)
+
+                /* TODO make roster images load faster */
+                val albumUri = Uri.parse("content://media/external/audio/albumart")
+                val uri = currentSong.cover?.let { ContentUris.withAppendedId(albumUri, it.toLong()) }
+                Picasso.get().load(uri)
+                    .fit()
+                    .centerCrop()
+                    .error(R.drawable.unknownsong)
+                    .into(ivControlsRosterCover)
             }
         }
 

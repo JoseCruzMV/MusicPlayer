@@ -1,7 +1,9 @@
 package com.example.musicplayer.ui.view.rostersongs
 
+import android.content.ContentUris
 import android.content.res.Resources
 import android.graphics.Color
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -13,6 +15,7 @@ import com.example.musicplayer.R
 import com.example.musicplayer.core.QueueHelper
 import com.example.musicplayer.databinding.RosterSongsItemBinding
 import com.example.musicplayer.domain.model.AudioModel
+import com.squareup.picasso.Picasso
 
 class RosterSongsAdapter(
     private val inflater: LayoutInflater,
@@ -37,10 +40,19 @@ class RosterRowHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(song: AudioModel) = binding.apply {
         //val color = ContextCompat.getColor()
-        /*TODO get context to  user getColor to retrieve color resource */
+        /* TODO get context to  user getColor to retrieve color resource */
         if (layoutPosition == QueueHelper.currentIndex)
             tvSongTitle.setTextColor(Color.parseColor("#B771FC"))
         tvSongTitle.text = song.title
+        tvSongArtist.text = song.artist
+
+        val albumUri = Uri.parse("content://media/external/audio/albumart")
+        val uri = song.cover?.let { ContentUris.withAppendedId(albumUri, it.toLong()) }
+        Picasso.get().load(uri)
+            .fit()
+            .centerCrop()
+            .error(R.drawable.unknownsong)
+            .into(ivSongCover)
 
         clItemContainer.setOnClickListener {
             QueueHelper.currentIndex = layoutPosition
