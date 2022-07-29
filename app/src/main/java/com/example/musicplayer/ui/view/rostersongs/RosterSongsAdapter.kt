@@ -1,6 +1,7 @@
 package com.example.musicplayer.ui.view.rostersongs
 
 import android.content.ContentUris
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
 import android.net.Uri
@@ -39,10 +40,9 @@ class RosterRowHolder(
     private val onClick: () -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(song: AudioModel) = binding.apply {
-        //val color = ContextCompat.getColor()
-        /* TODO get context to  user getColor to retrieve color resource */
+        val color = ContextCompat.getColor(binding.tvSongTitle.context, R.color.secondary)
         if (layoutPosition == QueueHelper.currentIndex)
-            tvSongTitle.setTextColor(Color.parseColor("#B771FC"))
+            tvSongTitle.setTextColor(color)
         tvSongTitle.text = song.title
         tvSongArtist.text = song.artist
 

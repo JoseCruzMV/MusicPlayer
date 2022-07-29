@@ -44,7 +44,7 @@ class RosterSongsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = RosterSongsAdapter(
             inflater = layoutInflater,
-            onClick = ::toSongsPlayerFragment
+            onClick = ::toSongsPlayerFragment,
         )
 
         binding.songsRecyclerView.apply {
