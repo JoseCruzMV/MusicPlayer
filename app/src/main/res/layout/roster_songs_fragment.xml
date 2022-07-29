@@ -79,6 +79,20 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="TextView" />
 
+        <TextView
+            android:id="@+id/tv_controls_roster_song_author"
+            style="@style/LightTextTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="@+id/tv_controls_roster_song_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_controls_roster_song_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_controls_roster_song_title"
+            tools:text="TextView" />
+
         <ImageView
             android:id="@+id/iv_controls_roster_pause_play"
             android:layout_width="@dimen/controls_size"
@@ -94,8 +108,8 @@
         <SeekBar
             android:id="@+id/sb_controls_roster_progress"
             android:layout_width="0dp"
-            android:paddingTop="@dimen/margin_8"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/margin_8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

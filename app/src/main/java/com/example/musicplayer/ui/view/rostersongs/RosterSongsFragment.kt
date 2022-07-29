@@ -100,6 +100,7 @@ class RosterSongsFragment : Fragment() {
             binding.apply {
                 tvControlsRosterSongTitle.text = currentSong.title
                 tvControlsRosterSongTitle.isSelected = true
+                tvControlsRosterSongAuthor.isSelected = true
                 sbControlsRosterProgress.progress = 0
                 sbControlsRosterProgress.max = currentSong.duration.toInt()
                 ivControlsRosterPausePlay.setImageResource(R.drawable.ic_pause)

@@ -7,6 +7,8 @@
     <dimen name="button_padding">16dp</dimen>
     <dimen name="card_padding">8dp</dimen>
     <dimen name="image_roster">56dp</dimen>
-    <dimen name="text_tittle_size">32sp</dimen>
     <dimen name="controls_size">48dp</dimen>
+
+    <dimen name="text_tittle_size">32sp</dimen>
+    <dimen name="text_body_size">16sp</dimen>
 </resources>

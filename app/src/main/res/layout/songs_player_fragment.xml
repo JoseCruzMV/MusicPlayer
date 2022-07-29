@@ -7,75 +7,71 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="16dp">
 
+    <ImageView
+        android:id="@+id/iv_music_icon"
+        android:layout_width="379dp"
+        android:layout_height="345dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/songs_cover_description"
+        app:layout_constraintBottom_toTopOf="@+id/tv_player_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_music_note"
+        app:tint="@color/secondary" />
+
     <TextView
         android:id="@+id/tv_player_title"
         style="@style/TextTitleTheme"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:ellipsize="marquee"
         android:gravity="center_vertical"
         android:marqueeRepeatLimit="marquee_forever"
         android:scrollHorizontally="true"
         android:singleLine="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/iv_music_icon"
+        app:layout_constraintBottom_toTopOf="@+id/tv_current_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/iv_music_icon"
         tools:text="TextView" />
-
-    <ImageView
-        android:id="@+id/iv_music_icon"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/songs_cover_description"
-        app:layout_constraintBottom_toTopOf="@+id/tv_current_time"
-        app:layout_constraintDimensionRatio="1.1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_player_title"
-        app:layout_constraintVertical_weight="3"
-        app:srcCompat="@drawable/ic_music_note"
-        app:tint="@color/secondary" />
 
     <TextView
         android:id="@+id/tv_current_time"
-        android:layout_width="0dp"
+        android:layout_width="42dp"
         android:layout_height="wrap_content"
         android:text="@string/starter_time_player"
         android:textColor="@color/secondary"
         app:layout_constraintBottom_toTopOf="@+id/iv_previous"
         app:layout_constraintEnd_toStartOf="@+id/sb_progress"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_music_icon" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_player_title" />
 
     <SeekBar
         android:id="@+id/sb_progress"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_current_time"
+        android:layout_width="295dp"
+        android:layout_height="19dp"
         app:layout_constraintEnd_toStartOf="@+id/tv_total_time"
-        app:layout_constraintHorizontal_weight="7"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv_current_time"
         app:layout_constraintTop_toTopOf="@+id/tv_current_time" />
 
     <TextView
         android:id="@+id/tv_total_time"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="42dp"
+        android:layout_height="19dp"
         android:gravity="end"
         android:text="@string/starter_time_player"
         android:textColor="@color/secondary"
-        app:layout_constraintBottom_toBottomOf="@+id/sb_progress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/sb_progress"
-        app:layout_constraintTop_toTopOf="@+id/sb_progress" />
+        app:layout_constraintTop_toTopOf="@+id/tv_current_time" />
 
     <ImageView
         android:id="@+id/iv_previous"
@@ -84,6 +80,7 @@
         android:contentDescription="@string/previous_song_button_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iv_pause_play"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_current_time"
         app:srcCompat="@drawable/ic_skip_previous"
@@ -95,24 +92,35 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:contentDescription="@string/pause_play_button_description"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_previous"
         app:layout_constraintEnd_toStartOf="@+id/iv_next"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_previous"
         app:layout_constraintTop_toTopOf="@+id/iv_previous"
         app:srcCompat="@drawable/ic_pause"
         app:tint="@color/secondary"
-        tools:ignore="RedundantDescriptionCheck,RedundantDescriptionCheck" />
+        tools:ignore="RedundantDescriptionCheck,RedundantDescriptionCheck"
+        tools:layout_editor_absoluteY="676dp" />
 
     <ImageView
         android:id="@+id/iv_next"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:contentDescription="@string/skip_song_button_description"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_pause_play"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_pause_play"
         app:layout_constraintTop_toTopOf="@+id/iv_pause_play"
         app:srcCompat="@drawable/ic_skip_next"
         app:tint="@color/secondary"
         tools:ignore="RedundantDescriptionCheck,RedundantDescriptionCheck" />
+
+    <TextView
+        android:id="@+id/tv_player_author"
+        style="@style/LightTextTheme"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tv_player_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_player_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_player_title"
+        tools:text="TextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
