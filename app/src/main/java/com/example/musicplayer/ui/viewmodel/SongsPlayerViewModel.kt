@@ -1,8 +1,8 @@
 package com.example.musicplayer.ui.viewmodel
 
+import android.media.MediaPlayer
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.musicplayer.core.MediaPlayerHelper
 import com.example.musicplayer.core.QueueHelper
 import com.example.musicplayer.domain.model.AudioModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,14 +10,14 @@ import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @HiltViewModel
-class SongsPlayerViewModel @Inject constructor() : ViewModel() {
+class SongsPlayerViewModel @Inject constructor(
+    private val mediaPlayer: MediaPlayer,
+) : ViewModel() {
 
     val currentSong = MutableLiveData<AudioModel>()
     private lateinit var _currentSong: AudioModel
     val isSongPlaying = MutableLiveData<Boolean>()
     val songProgress = MutableLiveData<Int> ()
-
-    private val mediaPlayer = MediaPlayerHelper.getInstance()
 
     fun getCurrentSong() {
         _currentSong = QueueHelper.songsList[QueueHelper.currentIndex]
