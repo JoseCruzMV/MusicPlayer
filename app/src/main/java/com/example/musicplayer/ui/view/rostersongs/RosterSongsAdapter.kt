@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.musicplayer.R
+import com.example.musicplayer.core.GlideHelper
 import com.example.musicplayer.core.QueueHelper
 import com.example.musicplayer.databinding.RosterSongsItemBinding
 import com.example.musicplayer.domain.model.AudioModel
@@ -45,13 +46,19 @@ class RosterRowHolder(
         val albumUri = Uri.parse("content://media/external/audio/albumart")
         val uri = song.cover?.let { ContentUris.withAppendedId(albumUri, it.toLong()) }
 
-        ivSongCover.context?.let {
+        GlideHelper.provideGlide(
+            context = ivSongCover.context,
+            uri = uri,
+            view = ivSongCover
+        )
+
+        /*ivSongCover.context?.let {
             Glide.with(it)
                 .load(uri)
                 .centerCrop()
                 .error(R.drawable.unknownsong)
                 .into(ivSongCover)
-        }
+        }*/
 
 
         clItemContainer.setOnClickListener {
