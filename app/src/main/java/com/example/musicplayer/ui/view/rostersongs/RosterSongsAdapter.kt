@@ -5,6 +5,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -39,9 +40,8 @@ class RosterRowHolder(
     private val glideHelper: RequestManager,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(song: AudioModel) = binding.apply {
-        val color = ContextCompat.getColor(binding.tvSongTitle.context, R.color.secondary)
         if (layoutPosition == QueueHelper.currentIndex)
-            tvSongTitle.setTextColor(color)
+            TextViewCompat.setTextAppearance(tvSongTitle, R.style.SelectedTextTheme)
         tvSongTitle.text = song.title
         tvSongArtist.text = song.artist
 
