@@ -8,9 +8,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.example.musicplayer.R
-import com.example.musicplayer.core.GlideHelper
 import com.example.musicplayer.core.QueueHelper
 import com.example.musicplayer.databinding.RosterSongsItemBinding
 import com.example.musicplayer.domain.model.AudioModel
@@ -18,6 +17,7 @@ import com.example.musicplayer.domain.model.AudioModel
 class RosterSongsAdapter(
     private val inflater: LayoutInflater,
     private val onClick: () -> Unit,
+    private val glideHelper: RequestManager,
 ) : ListAdapter<AudioModel, RosterRowHolder>(DiffCallBack) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -25,6 +25,7 @@ class RosterSongsAdapter(
     ) = RosterRowHolder(
         RosterSongsItemBinding.inflate(inflater, parent, false),
         onClick,
+        glideHelper,
     )
 
     override fun onBindViewHolder(holder: RosterRowHolder, position: Int) {
@@ -35,6 +36,7 @@ class RosterSongsAdapter(
 class RosterRowHolder(
     private val binding: RosterSongsItemBinding,
     private val onClick: () -> Unit,
+    private val glideHelper: RequestManager,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(song: AudioModel) = binding.apply {
         val color = ContextCompat.getColor(binding.tvSongTitle.context, R.color.secondary)
@@ -46,20 +48,10 @@ class RosterRowHolder(
         val albumUri = Uri.parse("content://media/external/audio/albumart")
         val uri = song.cover?.let { ContentUris.withAppendedId(albumUri, it.toLong()) }
 
-        GlideHelper.provideGlide(
-            context = ivSongCover.context,
-            uri = uri,
-            view = ivSongCover
-        )
-
-        /*ivSongCover.context?.let {
-            Glide.with(it)
-                .load(uri)
-                .centerCrop()
-                .error(R.drawable.unknownsong)
-                .into(ivSongCover)
-        }*/
-
+        glideHelper.load(uri)
+            .error(R.drawable.unknownsong)
+            .centerCrop()
+            .into(ivSongCover)
 
         clItemContainer.setOnClickListener {
             QueueHelper.currentIndex = layoutPosition

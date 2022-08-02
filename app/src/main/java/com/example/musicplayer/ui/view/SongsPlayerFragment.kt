@@ -9,17 +9,20 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.SongsPlayerFragmentBinding
 import com.example.musicplayer.ui.viewmodel.SongsPlayerViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SongsPlayerFragment : Fragment() {
     private lateinit var binding: SongsPlayerFragmentBinding
 
     private val songsPlayerViewModel: SongsPlayerViewModel by activityViewModels()
+
+    @Inject lateinit var glideHelper: RequestManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,13 +65,10 @@ class SongsPlayerFragment : Fragment() {
                 val albumUri = Uri.parse("content://media/external/audio/albumart")
                 val uri = currentSong.cover?.let { ContentUris.withAppendedId(albumUri, it.toLong()) }
 
-                context?.let {
-                    Glide.with(it)
-                        .load(uri)
-                        .centerCrop()
-                        .error(R.drawable.unknownsong)
-                        .into(ivMusicIcon)
-                }
+                glideHelper.load(uri)
+                    .error(R.drawable.unknownsong)
+                    .centerCrop()
+                    .into(ivMusicIcon)
             }
         }
 

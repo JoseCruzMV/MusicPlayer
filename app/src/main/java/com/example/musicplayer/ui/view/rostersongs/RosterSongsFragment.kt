@@ -18,12 +18,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.RosterSongsFragmentBinding
 import com.example.musicplayer.ui.viewmodel.RosterSongsViewModel
 import com.example.musicplayer.ui.viewmodel.SongsPlayerViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RosterSongsFragment : Fragment() {
@@ -31,6 +32,8 @@ class RosterSongsFragment : Fragment() {
 
     private val rosterSongsViewModel: RosterSongsViewModel by viewModels()
     private val songsPlayerViewModel: SongsPlayerViewModel by activityViewModels()
+
+    @Inject lateinit var glideHelper: RequestManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +48,7 @@ class RosterSongsFragment : Fragment() {
         val adapter = RosterSongsAdapter(
             inflater = layoutInflater,
             onClick = ::toSongsPlayerFragment,
+            glideHelper = glideHelper
         )
 
         binding.songsRecyclerView.apply {
@@ -112,13 +116,10 @@ class RosterSongsFragment : Fragment() {
                 val albumUri = Uri.parse("content://media/external/audio/albumart")
                 val uri = currentSong.cover?.let { ContentUris.withAppendedId(albumUri, it.toLong()) }
 
-                ivControlsRosterCover.context?.let {
-                    Glide.with(it)
-                        .load(uri)
-                        .centerCrop()
-                        .error(R.drawable.unknownsong)
-                        .into(ivControlsRosterCover)
-                }
+                glideHelper.load(uri)
+                    .error(R.drawable.unknownsong)
+                    .centerCrop()
+                    .into(ivControlsRosterCover)
             }
         }
 
