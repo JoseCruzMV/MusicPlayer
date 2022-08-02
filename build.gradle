@@ -2,11 +2,11 @@
 buildscript {
     repositories {
         google()
+        mavenCentral()
     }
     dependencies {
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.42"
-
     }
 }
 plugins {

@@ -9,11 +9,10 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.SongsPlayerFragmentBinding
 import com.example.musicplayer.ui.viewmodel.SongsPlayerViewModel
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -62,11 +61,14 @@ class SongsPlayerFragment : Fragment() {
 
                 val albumUri = Uri.parse("content://media/external/audio/albumart")
                 val uri = currentSong.cover?.let { ContentUris.withAppendedId(albumUri, it.toLong()) }
-                Picasso.get().load(uri)
-                    .fit()
-                    .centerCrop()
-                    .error(R.drawable.unknownsong)
-                    .into(ivMusicIcon)
+
+                context?.let {
+                    Glide.with(it)
+                        .load(uri)
+                        .centerCrop()
+                        .error(R.drawable.unknownsong)
+                        .into(ivMusicIcon)
+                }
             }
         }
 

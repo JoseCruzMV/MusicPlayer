@@ -1,22 +1,18 @@
 package com.example.musicplayer.ui.view.rostersongs
 
 import android.content.ContentUris
-import android.content.Context
-import android.content.res.Resources
-import android.graphics.Color
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.musicplayer.R
 import com.example.musicplayer.core.QueueHelper
 import com.example.musicplayer.databinding.RosterSongsItemBinding
 import com.example.musicplayer.domain.model.AudioModel
-import com.squareup.picasso.Picasso
 
 class RosterSongsAdapter(
     private val inflater: LayoutInflater,
@@ -48,11 +44,15 @@ class RosterRowHolder(
 
         val albumUri = Uri.parse("content://media/external/audio/albumart")
         val uri = song.cover?.let { ContentUris.withAppendedId(albumUri, it.toLong()) }
-        Picasso.get().load(uri)
-            .fit()
-            .centerCrop()
-            .error(R.drawable.unknownsong)
-            .into(ivSongCover)
+
+        ivSongCover.context?.let {
+            Glide.with(it)
+                .load(uri)
+                .centerCrop()
+                .error(R.drawable.unknownsong)
+                .into(ivSongCover)
+        }
+
 
         clItemContainer.setOnClickListener {
             QueueHelper.currentIndex = layoutPosition
