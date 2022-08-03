@@ -21,9 +21,11 @@ class SongsPlayerViewModel @Inject constructor(
 
     fun getCurrentSong() {
         _currentSong = QueueHelper.songsList[QueueHelper.currentIndex]
-        currentSong.value = _currentSong
-        playMusic()
-        viewModelScope.launch { getCurrentPosition() }
+        if (currentSong.value != _currentSong) {
+            currentSong.value = _currentSong
+            playMusic()
+            viewModelScope.launch { getCurrentPosition() }
+        }
     }
 
     private fun playMusic() {
