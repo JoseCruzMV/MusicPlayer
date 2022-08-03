@@ -66,7 +66,7 @@ class SongsPlayerFragment : Fragment() {
                 val uri = currentSong.cover?.let { ContentUris.withAppendedId(albumUri, it.toLong()) }
 
                 glideHelper.load(uri)
-                    .error(R.drawable.unknownsong)
+                    .error(R.drawable.unknown_song)
                     .centerCrop()
                     .into(ivMusicIcon)
             }

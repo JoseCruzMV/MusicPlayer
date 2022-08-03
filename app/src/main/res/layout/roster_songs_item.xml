@@ -15,7 +15,7 @@
         android:layout_height="@dimen/image_roster"
         android:layout_marginEnd="@dimen/margin_8"
         android:scaleType="centerCrop"
-        android:src="@drawable/unknownsong"
+        android:src="@drawable/unknown_song"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_song_title"
         app:layout_constraintStart_toStartOf="parent"

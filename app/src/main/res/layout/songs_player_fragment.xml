@@ -19,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_music_note" />
+        app:srcCompat="@drawable/unknown_song" />
 
     <TextView
         android:id="@+id/tv_player_title"
@@ -52,7 +52,7 @@
 
     <TextView
         android:id="@+id/tv_current_time"
-        android:layout_width="42dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/starter_time_player"
         android:textColor="@color/secondary"
@@ -64,8 +64,8 @@
 
     <SeekBar
         android:id="@+id/sb_progress"
-        android:layout_width="295dp"
-        android:layout_height="19dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/tv_total_time"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv_current_time"
@@ -73,8 +73,8 @@
 
     <TextView
         android:id="@+id/tv_total_time"
-        android:layout_width="42dp"
-        android:layout_height="19dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="end"
         android:text="@string/starter_time_player"
         android:textColor="@color/secondary"
@@ -108,8 +108,7 @@
         app:layout_constraintTop_toTopOf="@+id/iv_previous"
         app:srcCompat="@drawable/ic_pause"
         app:tint="@color/secondary"
-        tools:ignore="RedundantDescriptionCheck,RedundantDescriptionCheck"
-        tools:layout_editor_absoluteY="676dp" />
+        tools:ignore="RedundantDescriptionCheck,RedundantDescriptionCheck" />
 
     <ImageView
         android:id="@+id/iv_next"

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/FragmentsTheme"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_notification_song_title"
+        style="@style/TextTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="TextView" />
+
+    <TextView
+        android:id="@+id/tv_notification_song_artist"
+        style="@style/LightTextTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="TextView" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_notification_previous"
+            android:layout_width="@dimen/controls_size"
+            android:layout_height="@dimen/controls_size"
+            android:layout_weight="1"
+            android:contentDescription="@string/pause_play_button_description"
+            app:srcCompat="@drawable/ic_skip_previous"
+            app:tint="@color/secondary" />
+
+        <ImageView
+            android:id="@+id/iv_notification_pause_play"
+            android:layout_width="@dimen/controls_size"
+            android:layout_height="@dimen/controls_size"
+            android:layout_weight="1"
+            android:contentDescription="@string/pause_play_button_description"
+            app:srcCompat="@drawable/ic_pause"
+            app:tint="@color/secondary" />
+
+        <ImageView
+            android:id="@+id/iv_notification_next"
+            android:layout_width="@dimen/controls_size"
+            android:layout_height="@dimen/controls_size"
+            android:layout_weight="1"
+            android:contentDescription="@string/pause_play_button_description"
+            app:srcCompat="@drawable/ic_skip_next"
+            app:tint="@color/secondary" />
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/sb_notification_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/widget_padding"
+        app:layout_constraintEnd_toStartOf="@+id/tv_total_time"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_current_time"
+        app:layout_constraintTop_toTopOf="@+id/tv_current_time" />
+</LinearLayout>

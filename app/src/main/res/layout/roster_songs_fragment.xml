@@ -61,7 +61,7 @@
             app:layout_constraintBottom_toTopOf="@+id/sb_controls_roster_progress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/unknownsong" />
+            app:srcCompat="@drawable/unknown_song" />
 
         <TextView
             android:id="@+id/tv_controls_roster_song_title"

@@ -4,7 +4,6 @@ import android.content.ContentUris
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -49,7 +48,7 @@ class RosterRowHolder(
         val uri = song.cover?.let { ContentUris.withAppendedId(albumUri, it.toLong()) }
 
         glideHelper.load(uri)
-            .error(R.drawable.unknownsong)
+            .error(R.drawable.unknown_song)
             .centerCrop()
             .into(ivSongCover)
 

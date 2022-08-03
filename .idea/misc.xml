@@ -6,10 +6,11 @@
         <entry key="..\:/Users/josec/AndroidStudioProjects/MusicPlayer/app/src/main/res/drawable/ic_play.xml" value="0.1" />
         <entry key="..\:/Users/josec/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/josec/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/media_player_fragment.xml" value="0.11851092896174864" />
+        <entry key="..\:/Users/josec/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/notification_layout.xml" value="0.1287568306010929" />
         <entry key="..\:/Users/josec/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/permissions_denied_fragment.xml" value="0.18" />
         <entry key="..\:/Users/josec/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/roster_songs_fragment.xml" value="0.22" />
         <entry key="..\:/Users/josec/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/roster_songs_item.xml" value="0.25" />
-        <entry key="..\:/Users/josec/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/songs_player_fragment.xml" value="0.18" />
+        <entry key="..\:/Users/josec/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/songs_player_fragment.xml" value="0.1287568306010929" />
       </map>
     </option>
   </component>
