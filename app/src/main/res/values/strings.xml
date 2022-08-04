@@ -9,4 +9,6 @@
     <string name="pause_play_button_description">Pause / Play button</string>
     <string name="previous_song_button_description">Previous Song button</string>
     <string name="skip_song_button_description">Next Song Button</string>
+    <string name="channel_name">MusicPlayer Notification</string>
+    <string name="channel_description">Shows the control of music player</string>
 </resources>

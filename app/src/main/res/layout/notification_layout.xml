@@ -12,14 +12,14 @@
         style="@style/TextTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="TextView" />
+        android:text="TextView" />
 
     <TextView
         android:id="@+id/tv_notification_song_artist"
         style="@style/LightTextTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="TextView" />
+        android:text="TextView" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,14 +54,4 @@
             app:srcCompat="@drawable/ic_skip_next"
             app:tint="@color/secondary" />
     </LinearLayout>
-
-    <SeekBar
-        android:id="@+id/sb_notification_progress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/widget_padding"
-        app:layout_constraintEnd_toStartOf="@+id/tv_total_time"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tv_current_time"
-        app:layout_constraintTop_toTopOf="@+id/tv_current_time" />
 </LinearLayout>

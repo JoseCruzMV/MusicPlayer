@@ -1,16 +1,25 @@
 package com.example.musicplayer.ui.view
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.ContentUris
+import android.content.Context
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RemoteViews
 import android.widget.SeekBar
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.RequestManager
 import com.example.musicplayer.R
+import com.example.musicplayer.core.CreateNotification
 import com.example.musicplayer.databinding.SongsPlayerFragmentBinding
 import com.example.musicplayer.ui.viewmodel.SongsPlayerViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +31,10 @@ class SongsPlayerFragment : Fragment() {
 
     private val songsPlayerViewModel: SongsPlayerViewModel by activityViewModels()
 
-    @Inject lateinit var glideHelper: RequestManager
+    @Inject
+    lateinit var glideHelper: RequestManager
+
+    private lateinit var customNotification: NotificationCompat.Builder
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,13 +75,34 @@ class SongsPlayerFragment : Fragment() {
                 ivPausePlay.setImageResource(R.drawable.ic_pause)
 
                 val albumUri = Uri.parse("content://media/external/audio/albumart")
-                val uri = currentSong.cover?.let { ContentUris.withAppendedId(albumUri, it.toLong()) }
+                val uri =
+                    currentSong.cover?.let { ContentUris.withAppendedId(albumUri, it.toLong()) }
 
                 glideHelper.load(uri)
                     .error(R.drawable.unknown_song)
                     .centerCrop()
                     .into(ivMusicIcon)
+
+
+                // Notification
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val channel = NotificationChannel(
+                        CreateNotification.CHANNEL_ID,
+                        getString(R.string.channel_name),
+                        NotificationManager.IMPORTANCE_LOW
+                    ).apply {
+                        description = getString(R.string.channel_description)
+                    }
+
+                    val notificationManager: NotificationManager =
+                        activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    notificationManager.createNotificationChannel(channel)
+                }
+                context?.let {
+                    CreateNotification.createNotification(context = it, song = currentSong)
+                }
             }
+
         }
 
         songsPlayerViewModel.isSongPlaying.observe(viewLifecycleOwner) { isSongPlaying ->
